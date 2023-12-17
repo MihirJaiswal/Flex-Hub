@@ -3,6 +3,7 @@ import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/solid';
 import Logo from "@/assets/Logo.png";
 import Link from "./Link";
 import { SelectedPage } from '@/shared/types';
+import useMediaQuery from '@/hooks/useMediaQuery';
 
 type Props = {
     selectedPage: SelectedPage;
@@ -11,6 +12,8 @@ type Props = {
 
 const Navbar = ({selectedPage, setSelectedPage}: Props) => {
     const flexbetween = "flex items-center justify-between";
+    const isAboveMediumScreen = useMediaQuery("(min-width: 1060px)")
+    
   return (
   <nav>
     <div
@@ -20,7 +23,7 @@ const Navbar = ({selectedPage, setSelectedPage}: Props) => {
             <div className={`${flexbetween} w-full gap-16` }>
                 <img src={Logo} alt="logo" />
             </div>
-            <div className={`${flexbetween} w-full`}>
+            {isAboveMediumScreen ? (<div className={`${flexbetween} w-full`}>
                 <div className={`${flexbetween} gap-8 text-sm`}>
                     <Link 
                      page="Home"
@@ -53,11 +56,15 @@ const Navbar = ({selectedPage, setSelectedPage}: Props) => {
                     <button>Become a Member</button>
                 </div>
             
-            </div>
+            </div> : (
+                <div></div>
+            )}
 
         </div>
     </div>
   </nav>
-)}
+)
+
+}
 
 export default Navbar

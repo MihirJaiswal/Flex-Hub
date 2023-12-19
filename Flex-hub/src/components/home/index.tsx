@@ -8,7 +8,8 @@ import HomePageText from '@/assets/HomePageText.png'
 import icon1 from '@/assets/class-icon-1.png'
 import icon2 from '@/assets/class-icon-2.png'
 import icon3 from '@/assets/class-icon-3.png'
-import icon4 from '@/assets/class-icon-4.png'
+import { motion } from 'framer-motion'
+import { isPromise } from 'util/types'
 
 
 type Props = {
@@ -20,24 +21,51 @@ const Home = ({ setSelectedPage}: Props) => {
   return (
     <section id="home" className='gap-16 bg-gray-20 py-10 md:h-full md:pb-0'>
         {/* Image and header */}
-        <div className='md:flex mx-auto w-5/6 items-center justify-center md:h-5/6'>
+        <motion.div
+         className='md:flex mx-auto w-5/6 items-center justify-center md:h-5/6'
+         onViewportEnter={() => setSelectedPage(SelectedPage.Home)}
+         >
             
             {/* Main Header */}
             <div className='z-10 mt-32 md:basis-3/5'>
                 {/*heading*/}
-                <div className='md:-mt-20'>
+                <motion.div 
+                className='md:-mt-20'
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, amount: 0.5 }}
+                transition={{ duration: 0.5 }}
+                variants={{
+                    hidden: { opacity: 0, x: -150 },
+                    visible: { opacity: 1, x: 0 },
+                }}
+                >
                     <div className='relative'>
-                        <div className='before:absolute before:-top-20 before:-left-20 before:z-[-1] md:before:content-evolvetext'>
-                            <h1 className='font-[Archivo black]'>Flex-Hub</h1>
+                        <div className='before:absolute before:-top-20 before:-left-20 before:z-[-1]  md:before:content-evolvetext'>
+                            <img src={HomePageText} alt="home-page-text"/>
                         </div>
                     </div>
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officia libero iste itaque quis aliquam? Corrupti!
+                    <p className='mt-8 text-sm'>
+                    Welcome to Unrivaled Gym, where excellence meets fitness. Our unparalleled <br />
+                    training fitness classes are designed to sculpt your body into the shape of your <br />
+                    dreams. 
+                    Immerse yourself in world-class studios equipped with state-of-the-art <br /> 
+                    equipment and facilities.
                     </p>
-                </div>
+                </motion.div>
 
                 {/* Action buttons */}
-                <div>
+                <motion.div
+                 className='mt-8 flex items-center gap-8'
+                 initial="hidden"
+                 whileInView="visible"
+                 viewport={{ once: true, amount: 0.5 }}
+                 transition={{ delay: 0.2, duration: 0.5 }}
+                 variants={{
+                     hidden: { opacity: 0, x: -50 },
+                     visible: { opacity: 1, x: 0 },
+                 }}
+                 >
                     <ActionButton setSelectedPage={setSelectedPage}>Join Now</ActionButton>
 
                     <AnchorLink 
@@ -48,24 +76,22 @@ const Home = ({ setSelectedPage}: Props) => {
                     <p>Learn More</p>
 
                 </AnchorLink>
-                </div>
+                </motion.div>
              </div>
 
              {/* Image */}
-           <div>
-            <img src={HomePageGraphic} alt="home-pageGraphic" className='w-full h-[460px]  object-cover w-50'/>
+           <div className='flex basis-3/5 justify-center md:z-10 md:ml-40 md:mt-16 md:justify-items-end'>
+            <img src={HomePageGraphic} alt="home-pageGraphic" className='md:h-[80%] md:w-[80%] md:-mt-20'/>
            </div>
-        </div>
+        </motion.div>
         {/*sponsor*/}
         {isAboveMediumScreens && (
-            <div>
-                <div>
-                    <div>
-                        <img src={icon1} alt="Weight Training" />
-                        <img src={icon2} alt="Cardio" />
-                        <img src={icon3} alt="Yoga" />
-                        <img src={icon4} alt="Diet" />
-
+            <div className="h-[145px] w-full bg-primary-100 py-10">
+                <div className='mx-auto -mt-4 w-5/6'>
+                    <div className='flex w-3/5 items-center justify-between'>
+                        <img src={icon1} alt="sponsor1" className='h-[80px] w-[100px]'/>
+                        <img src={icon2} alt="sponsor2" className='h-[100px] w-[170px]' />
+                        <img src={icon3} alt="sponsor3" className='h-[80px] w-[120px]'/>
                     </div>
                 </div>
             </div>

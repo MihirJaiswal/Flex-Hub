@@ -50,7 +50,7 @@ type Props = {
 
 const Trainig = ({ setSelectedPage }: Props) => {
   return (
-  <section id='training' className='w-full bg-primary-100 py-40'>
+  <section id='training' className=' W-Full bg-primary-100 py-[70px]'>
    
     <motion.div
     className='mx-auto w-5/6'
